@@ -18,7 +18,7 @@ class DISCORDModel {
                             "height": 0,
                             "width": 0
                         },
-                        url: "https://opa.phonevox.br/atendente/",
+                        url: `${url}`,
                         fields: [
                             {
                                 "name": "CLIENTE",
