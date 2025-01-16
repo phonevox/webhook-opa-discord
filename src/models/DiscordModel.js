@@ -3,7 +3,7 @@ import { logger } from "../utils/logger.js";
 import { stringify } from "flatted";
 
 class DISCORDModel {
-    sendMessage = async ({ nome_empresa, msg, client_name, number_client }) => {
+    sendMessage = async ({ url_opa, nome_empresa, msg, client_name, number_client }) => {
         try {
             // Envia uma requisição POST para o Webhook do Discord com os dados formatados
             const response = await axios.post(`${process.env.DISCORD_WEBOOK}`, {
@@ -18,7 +18,7 @@ class DISCORDModel {
                             "height": 0,
                             "width": 0
                         },
-                        url: `${url}`,
+                        url: `${url_opa}`,
                         fields: [
                             {
                                 "name": "CLIENTE",

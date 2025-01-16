@@ -4,11 +4,11 @@ import { logRequestAndResponse } from "../utils/loggerFunctions.js";
 
 class DISCORDController {
     sendMessage = async (request, reply) => {
-        const { url, nome_empresa, msg, client_name, number_client } = request.body; // Obtém os dados da requisição
+        const { url_opa, nome_empresa, msg, client_name, number_client } = request.body; // Obtém os dados da requisição
 
         try {
             // Envia uma requisição POST para o Webhook do Discord com os dados formatados
-            await DiscordModel.sendMessage({ url, nome_empresa, msg, client_name, number_client });
+            await DiscordModel.sendMessage({ url_opa, nome_empresa, msg, client_name, number_client });
 
             const responseData = {
                 message: 'Message sent successfully',
