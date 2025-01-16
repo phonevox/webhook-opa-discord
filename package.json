@@ -4,6 +4,7 @@
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
+    "flatted": "^3.3.2",
     "moment-timezone": "^0.5.46",
     "node-cache": "^5.1.2",
     "resolve": "^1.22.10",

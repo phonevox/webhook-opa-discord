@@ -1,3 +1,7 @@
+// Por algum motivo que não entendi o dotenv estava demorando para ser carregado, acarretando com que a variavel de ambiente LOG_CONFIG_LEVEL não fosse carregada, então fiz o carregamento do dotenv aqui também...
+import dotenv from 'dotenv';
+dotenv.config(); // Carrega as variáveis de ambiente do .env
+
 import winston from 'winston';
 import path from 'path';
 import moment from 'moment-timezone';
@@ -8,7 +12,7 @@ const logPath = path.resolve('logs');  // Coloca os logs em uma pasta 'logs'
 
 // Cria a instância do logger do Winston com timezone ajustado
 export const logger = winston.createLogger({
-    level: 'debug',
+    level: process.env.LOG_CONFIG_LEVEL || 'info',
     format: winston.format.combine(
         winston.format.timestamp({
             format: () => moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss') // Ajusta para o fuso horário correto
