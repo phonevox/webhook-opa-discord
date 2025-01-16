@@ -73,7 +73,7 @@ fastify.post('/send-message', { schema: sendMessageSchema }, async (request, rep
 // Inicia o servidor Fastify na porta 3000
 const start = async () => {
     try {
-        await fastify.listen({ port: 3000 });
+        await fastify.listen({ port: 3000, host: '0.0.0.0' });
         logger.info('Server is running on http://localhost:3000'); // Loga quando o servidor estiver iniciado
     } catch (err) {
         logger.error(`Error starting server: ${err.message}`); // Loga erro caso o servidor não consiga iniciar

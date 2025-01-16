@@ -1,0 +1,17 @@
+services:
+  rproxy-webhook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: phonevox/discord-webhook-proxy
+    ports:
+    - "${PUBLIC_FASTIFY_PORT:-3100}:3000"
+    env_file:
+    - .env
+    container_name: rproxy-webhook
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+    - ./logs:/app/logs
+    - ./allowed_ips.json:/app/allowed_ips.json
