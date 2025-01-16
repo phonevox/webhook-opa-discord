@@ -99,6 +99,18 @@ export const verifyClientIPAdmin = (request, reply) => {
     return false; // O IP não está permitido
 };
 
+export const checkIsAdmin = async (request, reply) => {
+    try {
+        const response = verifyClientIPAdmin(request, reply);
+
+        logger.info("Response from verifyClientIPAdmin:", response);
+        logger.info("Continuing with getAll method");
+    } catch (error) {
+        logger.error("Error in getAll method:", error);
+        return reply.status(500).send({ error: "Internal Server Error" });
+    }
+}
+
 // Função para atualizar o arquivo de IPs
 export const updateAllowedIPs = (allowedIPs) => {
     logger.info('Updating allowed IPs in file...');
