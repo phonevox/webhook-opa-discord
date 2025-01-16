@@ -1,7 +1,7 @@
 export const sendMessageSchema = {
     body: {
         type: 'object',
-        required: ['nome_empresa', 'client_name', 'number_client', 'msg', 'url_opa'],
+        required: ['url_opa', 'nome_empresa', 'client_name', 'number_client', 'msg'],
         properties: {
             url_opa: { type: 'string', minLength: 1, maxLength: 255 },
             nome_empresa: { type: 'string', minLength: 1, maxLength: 200 },
@@ -11,4 +11,3 @@ export const sendMessageSchema = {
         }
     },
 };
-
