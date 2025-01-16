@@ -36,6 +36,9 @@ As variáveis de ambiente necessárias são:
 
 `TIME_HIT_CACHE: Tempo em segundos para validar se os dados do cache não expiraram.`
 
+`PUBLIC_FASTIFY_PORT: Porta pública da API para o Docker.`
+
+
 Exemplo de arquivo .env:
 
 ````bash
@@ -44,6 +47,7 @@ FIXED_ALLOWED_IPS=192.168.0.1,192.168.0.2
 DISCORD_WEBHOOK=https://discord.com/api/webhooks/your-webhook-url
 TIME_CACHE=3600
 TIME_HIT_CACHE=600
+TIME_HIT_CACHE=3100
 ````
 
 ## Como Rodar a API
