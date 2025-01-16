@@ -1,4 +1,3 @@
-// Importa as bibliotecas necessárias
 import dotenv from 'dotenv';
 // Carrega as variáveis de ambiente do arquivo .env
 dotenv.config();
@@ -9,13 +8,9 @@ import Fastify from 'fastify';
 import { logger } from './src/utils/logger.js';
 import { getAllowedIPs } from './src/utils/cache.js';
 
-// Importa os controladores
-import { IpController } from './src/controller/IPController.js';
-import { DiscordController } from './src/controller/DiscordController.js';
-
-// Importa os schemas
-import { sendMessageSchema } from './src/schemas/discord/schemas.js'
-import { addIPSchema, deleteIPSchema, editIPSchema } from './src/schemas/ips/schemas.js';
+// Importa as rotas
+import { addIpRoute, deleteIpRoute, editIpRoute, getAllIpRoute } from './src/routes/IPRoutes.js';
+import { sendMessageRoute } from './src/routes/DiscordRoutes.js';
 
 // Cria uma instância do Fastify com o logger desabilitado (usaremos o Winston para logs)
 const fastify = Fastify({
@@ -42,30 +37,14 @@ fastify.addHook('onRequest', (request, reply, done) => {
     }
 });
 
-// Rota para adicionar um IP à lista de permitidos
-fastify.post('/allowed-ips', { schema: addIPSchema }, async (request, reply) => {
-    await IpController.create(request, reply); // Chama o método create da classe IPController
-});
+// Registra as rotas de IPs
+fastify.register(addIpRoute);
+fastify.register(getAllIpRoute);
+fastify.register(editIpRoute);
+fastify.register(deleteIpRoute);
 
-// Rota para obter todos os IPs permitidos
-fastify.get('/allowed-ips', async (request, reply) => {
-    await IpController.getAll(request, reply); // Chama o método getAll da classe IPController
-});
-
-// Rota para atualizar um IP permitido
-fastify.put('/allowed-ips', { schema: editIPSchema }, async (request, reply) => {
-    await IpController.edit(request, reply); // Chama o método edit da classe IPController
-});
-
-// Rota para deletar um IP permitido
-fastify.delete('/allowed-ips', { schema: deleteIPSchema }, async (request, reply) => {
-    await IpController.delete(request, reply); // Chama o método edit da classe IPController
-});
-
-// Rota para enviar mensagem para o Discord via Webhook
-fastify.post('/send-message', { schema: sendMessageSchema }, async (request, reply) => {
-    await DiscordController.sendMessage(request, reply); // Chama o método sendMessage da classe DiscordController
-});
+// Registra a rota do Discord
+fastify.register(sendMessageRoute);
 
 // Inicia o servidor Fastify na porta 3100
 const start = async () => {
