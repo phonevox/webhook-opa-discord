@@ -19,17 +19,14 @@ import { addIPSchema, deleteIPSchema, editIPSchema } from './src/schemas/ips/sch
 
 // Cria uma instância do Fastify com o logger desabilitado (usaremos o Winston para logs)
 const fastify = Fastify({
-    logger: false
+    logger: false,
+    trustProxy: '127.0.0.1', // Confia apenas no proxy local (ou IP específico do proxy)
 });
 
 // Middleware para verificar se o IP do cliente é permitido
 fastify.addHook('onRequest', (request, reply, done) => {
     const allowedIPs = getAllowedIPs(request); // Obtém os IPs permitidos da cache
     const clientIP = request.ip;
-
-    // Remover depois, deixar só o request.ip a opção de x-forwarded-for serve para simular outro ip, é possivel passar no curl, já o request.ip é o ip do cliente sempre e não é alterável.
-    // Para passar o ip no headers basta fazer isso: curl -H "X-Forwarded-For: 192.168.1.1" http://localhost:3000/allowed-ips
-    // const clientIP = request.headers['x-forwarded-for'] || request.ip; 
 
     // Verifica se o IP do cliente está na lista de IPs permitidos
     const isAllowed = allowedIPs.some(entry => entry.ip === clientIP);

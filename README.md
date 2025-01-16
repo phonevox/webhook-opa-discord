@@ -34,7 +34,7 @@ As variáveis de ambiente necessárias são:
 
 `TIME_CACHE: Tempo de cache do IP em segundos.`
 
-`TIME_HIT_CACHE: Tempo para validar se os dados do cache não expiraram.`
+`TIME_HIT_CACHE: Tempo em segundos para validar se os dados do cache não expiraram.`
 
 Exemplo de arquivo .env:
 

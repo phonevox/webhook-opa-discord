@@ -15,3 +15,4 @@ services:
     volumes:
     - ./logs:/app/logs
     - ./allowed_ips.json:/app/allowed_ips.json
+    network_mode: host
