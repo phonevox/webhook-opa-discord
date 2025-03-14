@@ -1,10 +1,14 @@
 import { DiscordModel } from "../models/DiscordModel.js";
 import { logger } from "../utils/logger.js";
 import { logRequestAndResponse } from "../utils/loggerFunctions.js";
+import { isValidIP } from "../utils/functions.js";
 
 class DISCORDController {
     sendMessage = async (request, reply) => {
         const { url_opa, nome_empresa, msg, client_name, number_client } = request.body; // Obtém os dados da requisição
+
+        // Valida se o ip passado no body é válido
+        isValidIP(url_opa) ? true : reply.status(400).send({ error: 'Invalid IP' }); // Verifica se o IP é válido
 
         try {
             // Envia uma requisição POST para o Webhook do Discord com os dados formatados
